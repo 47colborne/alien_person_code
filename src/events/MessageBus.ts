@@ -1,18 +1,18 @@
-import Event from "./Event";
+import GameEvent from "./GameEvent";
 
 export interface Subscriber {
-  handleEvent(event: Event): void;
+  handleEvent(event: GameEvent): void;
 }
 
 export default class MessageBus {
-  private subscriberList: Subscriber[] = [];
+  private subscribers: Subscriber[] = [];
 
-  public addSubscriber(subscriber: Subscriber): void {
-    this.subscriberList.push(subscriber);
+  public subscribe(subscriber: Subscriber) {
+    this.subscribers.push(subscriber);
   }
 
-  public publish(event: Event): void {
-    this.subscriberList.forEach((subscriber: Subscriber) => {
+  public publish(event: GameEvent) {
+    this.subscribers.forEach((subscriber: Subscriber) => {
       subscriber.handleEvent(event);
     });
   }

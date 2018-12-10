@@ -4,7 +4,7 @@ import Command from "./Command";
 import Character from "./Character";
 import Game from "./Game";
 import MessageBus from "./events/MessageBus";
-import Event from "./events/Event";
+import KeyPressEvent from "./events/KeyPressEvent";
 
 // config
 const alienCommand = new Command();
@@ -22,7 +22,7 @@ const person = new Character("p");
 const game = new Game(alien, person, alienCommand, personCommand);
 
 const messageBus = new MessageBus();
-messageBus.addSubscriber(game);
+messageBus.subscribe(game);
 
 // console input
 readline.emitKeypressEvents(process.stdin);
@@ -32,7 +32,7 @@ process.stdin.on("keypress", (str, key) => {
   if (key.ctrl && key.name === "c") {
     process.exit();
   } else {
-    const event = new Event(str);
+    const event = new KeyPressEvent(str);
     messageBus.publish(event);
   }
 });

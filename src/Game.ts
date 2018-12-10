@@ -1,8 +1,9 @@
 /* tslint:disable:no-console */
 import Character from "./Character";
 import Command from "./Command";
-import Event from "./events/Event";
+import KeyPressEvent, { KeyPressEventType } from "./events/KeyPressEvent";
 import { Subscriber } from "./events/MessageBus";
+import GameEvent from "./events/GameEvent";
 
 export default class Game implements Subscriber {
   private readonly characterA: Character;
@@ -22,8 +23,10 @@ export default class Game implements Subscriber {
     console.log(`-----${character.value}-----`);
   };
 
-  public handleEvent(event: Event): void {
-    this.run(event.value);
+  public handleEvent(event: GameEvent): void {
+    if (event.type === KeyPressEventType) {
+      this.run((event as KeyPressEvent).value);
+    }
   }
 
   public run(str: string): void {
