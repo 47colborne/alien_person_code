@@ -1,10 +1,12 @@
 /* tslint:disable:no-console */
-
 import Character from "./Character";
 import Command from "./Command";
-export default class Game {
-  private characterA: Character;
-  private characterB: Character;
+import Event from "./events/Event";
+import { Subscriber } from "./events/MessageBus";
+
+export default class Game implements Subscriber {
+  private readonly characterA: Character;
+  private readonly characterB: Character;
 
   private commandA: Command;
   private commandB: Command;
@@ -19,6 +21,10 @@ export default class Game {
   public display = (character: Character): void => {
     console.log(`-----${character.value}-----`);
   };
+
+  public handleEvent(event: Event): void {
+    this.run(event.value);
+  }
 
   public run(str: string): void {
     this.commandB.setCommandValue(str, this.characterB);
