@@ -1,25 +1,21 @@
 /* tslint:disable:no-console */
 import readline from "readline";
-import Command from "./Command";
 import Character from "./Character";
 import Game from "./Game";
 import MessageBus from "./events/MessageBus";
 import KeyPressEvent from "./events/KeyPressEvent";
 
-// config
-const alienCommand = new Command();
-alienCommand.addNewCommand("a", "A");
-alienCommand.addNewCommand("A", "a");
-
 const alien = new Character("a");
-
-const personCommand = new Command();
-personCommand.addNewCommand("p", "P");
-personCommand.addNewCommand("P", "p");
-
 const person = new Character("p");
 
-const game = new Game(alien, person, alienCommand, personCommand);
+const commands = {
+  a: () => (alien.value = "A"),
+  A: () => (alien.value = "a"),
+  p: () => (person.value = "P"),
+  P: () => (person.value = "p"),
+};
+
+const game = new Game(alien, person, commands);
 
 const messageBus = new MessageBus();
 messageBus.subscribe(game);

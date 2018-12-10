@@ -1,22 +1,23 @@
 /* tslint:disable:no-console */
 import Character from "./Character";
-import Command from "./Command";
 import KeyPressEvent, { KeyPressEventType } from "./events/KeyPressEvent";
 import { Subscriber } from "./events/MessageBus";
 import GameEvent from "./events/GameEvent";
+
+interface CommandMapping {
+  [command: string]: () => void;
+}
 
 export default class Game implements Subscriber {
   private readonly characterA: Character;
   private readonly characterB: Character;
 
-  private commandA: Command;
-  private commandB: Command;
+  private readonly commands: CommandMapping;
 
-  constructor(characterA: Character, characterB: Character, commandA: Command, commandB: Command) {
+  constructor(characterA: Character, characterB: Character, commands: CommandMapping) {
     this.characterA = characterA;
     this.characterB = characterB;
-    this.commandA = commandA;
-    this.commandB = commandB;
+    this.commands = commands;
   }
 
   public display = (character: Character): void => {
@@ -30,8 +31,13 @@ export default class Game implements Subscriber {
   }
 
   public run(str: string): void {
-    this.commandB.setCommandValue(str, this.characterB);
-    this.commandA.setCommandValue(str, this.characterA);
+    const handler = this.commands[str];
+
+    if (!handler) {
+      return;
+    }
+
+    handler();
 
     console.log(`((((Event Received: ${str})))))`);
     this.display(this.characterA);
