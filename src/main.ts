@@ -4,15 +4,17 @@ import Character from "./Character";
 import Game from "./Game";
 import MessageBus from "./events/MessageBus";
 import KeyPressEvent from "./events/KeyPressEvent";
+import { CommandMapping } from "./commands/Command";
+import { setValueCommand } from "./commands/setValueCommand";
 
 const alien = new Character("a");
 const person = new Character("p");
 
-const commands = {
-  a: () => (alien.value = "A"),
-  A: () => (alien.value = "a"),
-  p: () => (person.value = "P"),
-  P: () => (person.value = "p"),
+const commands: CommandMapping = {
+  a: setValueCommand(alien, "A"),
+  A: setValueCommand(alien, "a"),
+  p: setValueCommand(person, "P"),
+  P: setValueCommand(person, "p"),
 };
 
 const game = new Game(alien, person, commands);

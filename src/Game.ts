@@ -3,10 +3,7 @@ import Character from "./Character";
 import KeyPressEvent, { KeyPressEventType } from "./events/KeyPressEvent";
 import { Subscriber } from "./events/MessageBus";
 import GameEvent from "./events/GameEvent";
-
-interface CommandMapping {
-  [command: string]: () => void;
-}
+import { CommandMapping } from "./commands/Command";
 
 export default class Game implements Subscriber {
   private readonly characterA: Character;
@@ -30,16 +27,17 @@ export default class Game implements Subscriber {
     }
   }
 
-  public run(str: string): void {
+  public async run(str: string) {
+    console.log(`((((Event Received: ${str})))))`);
+
     const handler = this.commands[str];
 
     if (!handler) {
       return;
     }
 
-    handler();
+    await handler();
 
-    console.log(`((((Event Received: ${str})))))`);
     this.display(this.characterA);
     this.display(this.characterB);
   }
