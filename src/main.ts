@@ -1,5 +1,7 @@
 /* tslint:disable:no-console */
 import readline from "readline";
+import Alien from "./Alien";
+import Person from "./Person";
 
 readline.emitKeypressEvents(process.stdin);
 
