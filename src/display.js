@@ -1,49 +1,23 @@
-// const game = require('./game')
 const game = require('./game')
 
-const continuouslyUpdateStateAndDisplay = () => {
-	console.log("HERE:")
-	console.log(game)
-	const characterState = game.getCharacterState()
-	const character1State = character1State[0]
-	const character2State = character1State[1]
+const getStateAndDisplay = () => {
 
-	// display()
+	const characterValues = game.getCharacterValues()
 
-	setInterval(display(character1State, character2State), 1000);
+	const char1Value = characterValues[0]
+	const char2Value = characterValues[1]
 
-	    
-
-	// process.stdout.write(`${character1.output_value()}          ${character2.output_value()}`);
-
-	// const readline = require('readline');
-	// readline.emitKeypressEvents(process.stdin);
-	// process.stdin.setRawMode(true);
-
-	// process.stdin.on('keypress', (str, key) => {
-	//   if (key.ctrl && key.name === 'c') {
-	//     process.exit();
-	//   } else {
-	//     character1.performCommand(str);
-	//     character2.performCommand(str);
-
-	//     process.stdout.clearLine();
-	//     process.stdout.cursorTo(0);
-
-	//     process.stdout.write(`${character1.output_value()}          ${character2.output_value()}`);
-	//   }
-	// });
+	setTimeout(() => { displayValues(char1Value, char2Value) }, 3000);
 }
 
-continuouslyUpdateStateAndDisplay()
-
-const display = (character1, character2) => {
+const displayValues = (char1Value, char2Value) => {
 	process.stdout.clearLine();
     process.stdout.cursorTo(0);
 
-    process.stdout.write(`${character1State.output_value()}          ${character2State.output_value()}`);
+    process.stdout.write("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
+    process.stdout.write(`${char1Value}          ${char2Value}`);
 }
 
 module.exports = {
-	continuouslyUpdateStateAndDisplay: continuouslyUpdateStateAndDisplay
+	getStateAndDisplay: getStateAndDisplay
 }
