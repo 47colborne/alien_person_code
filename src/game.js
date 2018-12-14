@@ -17,6 +17,7 @@ let character2 = new Character('P', commands2);
 const startGameAndListener = () => {
 	process.stdout.write("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
 	process.stdout.write(`${character1.output_value()}          ${character2.output_value()}`);
+	process.stdout.write("\n\n\n\n\n\n\n\n")
 
 	const readline = require('readline');
 	readline.emitKeypressEvents(process.stdin);

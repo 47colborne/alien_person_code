@@ -16,6 +16,7 @@ const displayValues = (char1Value, char2Value) => {
 
     process.stdout.write("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
     process.stdout.write(`${char1Value}          ${char2Value}`);
+    process.stdout.write("\n\n\n\n\n\n\n\n")
 }
 
 module.exports = {
