@@ -7,7 +7,7 @@ const getStateAndDisplay = () => {
 	const char1Value = characterValues[0]
 	const char2Value = characterValues[1]
 
-	setTimeout(() => { displayValues(char1Value, char2Value) }, 3000);
+	displayValues(char1Value, char2Value)
 }
 
 const displayValues = (char1Value, char2Value) => {

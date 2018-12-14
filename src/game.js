@@ -10,9 +10,10 @@ const commands2 = {
   'P': 'p'
 }
 
-let character1 = new Character('A', commands1);
-let character2 = new Character('P', commands2);
+const character1 = new Character('A', commands1);
+const character2 = new Character('P', commands2);
 
+const pendingUpdatesObject = {}
 
 const startGameAndListener = () => {
 	process.stdout.write("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
@@ -28,8 +29,25 @@ const startGameAndListener = () => {
 	  if (key.ctrl && key.name === 'c') {
 	    process.exit();
 	  } else {
-	    character1.performCommand(str);
-	    character2.performCommand(str);
+	  	if (key.name === 'c') {
+	  // 		for (var property1 in object1) {
+			//   string1 += object1[property1];
+			// }
+
+	  		Object.keys(pendingUpdatesObject).forEach((key) => {
+	  			clearTimeout(pendingUpdatesObject[key])
+	  			delete pendingUpdatesObject[key]
+	  		})
+	  	} else {
+	  		const updateId = Date.now()
+			const pendingUpdate = setTimeout(() => {  
+				character1.performCommand(str);
+		    	character2.performCommand(str);
+		    	delete pendingUpdatesObject[updateId]
+			}, 3000);
+
+			pendingUpdatesObject[updateId] = pendingUpdate
+	  	}
 	  }
 	});
 }
